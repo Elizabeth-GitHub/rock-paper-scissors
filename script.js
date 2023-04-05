@@ -5,11 +5,34 @@ function getComputerChoice() {
     return choice
 }
 
-function playRound(playerSelection, computerSelection) {
-    let player = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase();
-    let answer = `Draw! You both have selected ${playerSelection}`;
 
-    if(player === computerSelection) {
+function sameRegister(str) {
+    let correctRegister = str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+
+    return correctRegister;
+}
+
+
+function getFinalAnswer(gameResult, playerChoice, computerChoice) {
+    let detailedResult = gameResult;
+
+    if (gameResult === "You win! ") {
+        detailedResult += `${playerChoice} ${playerChoice === "Scissors" ? "beat" : "beats"} ${
+            computerChoice}`;
+    }
+    else {
+        detailedResult += `${computerChoice} ${computerChoice === "Scissors" ? "beat" : "beats"} ${
+            playerChoice}`;
+    }
+    return detailedResult;
+}
+
+
+function playRound(playerSelection, computerSelection) {
+    let player = sameRegister(playerSelection);
+    let answer = `Draw! You both have selected ${player}`;
+
+    if (player === computerSelection) {
         return answer;
     }
     else {
@@ -40,17 +63,12 @@ function playRound(playerSelection, computerSelection) {
                 break;
         }
         
-        let finalAnswer = answer;
-        if (answer === "You win! ") {
-            finalAnswer += `${player} ${player === "Scissors" ? "beat" : "beats"} ${computerSelection}`;
-        }
-        else {
-            finalAnswer += `${computerSelection} ${computerSelection === "Scissors" ? "beat" : "beats"} ${player}`;
-        }
+        let finalAnswer = getFinalAnswer(answer, player, computerSelection);
         return finalAnswer;
     }
 }
 
-const playerSelection = "Rock";
+
+const playerSelection = "roCk";
 const computerSelection = getComputerChoice();
 console.log(playRound(playerSelection, computerSelection));
