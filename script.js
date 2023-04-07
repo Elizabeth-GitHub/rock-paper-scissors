@@ -70,14 +70,13 @@ function playRound(playerSelection, computerSelection) {
 
 function game(numberOfRounds) {
     for (let round = 0; round < numberOfRounds; round++) {
+        const playerSelection = prompt("Rock, Paper, or Scissors?");
         const computerSelection = getComputerChoice();
         let roundResult = playRound(playerSelection, computerSelection);
         console.log(`Round ${round + 1}: ${roundResult}`);
     }
 }
 
-
-const playerSelection = "roCk";
 
 const rounds = 5;
 game(rounds);
