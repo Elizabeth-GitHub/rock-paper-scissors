@@ -68,7 +68,16 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+function game(numberOfRounds) {
+    for (let round = 0; round < numberOfRounds; round++) {
+        const computerSelection = getComputerChoice();
+        let roundResult = playRound(playerSelection, computerSelection);
+        console.log(`Round ${round + 1}: ${roundResult}`);
+    }
+}
+
 
 const playerSelection = "roCk";
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+
+const rounds = 5;
+game(rounds);
