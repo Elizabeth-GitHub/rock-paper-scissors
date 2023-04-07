@@ -12,6 +12,19 @@ function sameRegister(str) {
     return correctRegister;
 }
 
+function finalScore(currentResult, currentScore) {
+    if (currentResult === "You win! ") {
+        currentScore[0] += 1; 
+    }
+    else if (currentResult === "You lose! ") {
+        currentScore[currentScore.length - 1] += 1;
+    }
+    else {
+        currentScore = currentScore.map(element => element + 1);
+    }
+    return currentScore;
+}
+
 
 function getFinalAnswer(gameResult, playerChoice, computerChoice) {
     let detailedResult = gameResult;
@@ -28,12 +41,13 @@ function getFinalAnswer(gameResult, playerChoice, computerChoice) {
 }
 
 
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection, computerSelection, previousResult) {
     let player = sameRegister(playerSelection);
-    let answer = `Draw! You both have selected ${player}`;
+    let answer = "";
+    let finalAnswer = "";
 
     if (player === computerSelection) {
-        return answer;
+        finalAnswer = `Draw! You both have selected ${player}`;
     }
     else {
         switch (player) {
@@ -62,19 +76,26 @@ function playRound(playerSelection, computerSelection) {
                 }
                 break;
         }
-        
-        let finalAnswer = getFinalAnswer(answer, player, computerSelection);
-        return finalAnswer;
+
+        finalAnswer= getFinalAnswer(answer, player, computerSelection);
     }
+
+    let allRoundsResult = finalScore(answer, previousResult);
+    return [finalAnswer, allRoundsResult];
 }
 
+
 function game(numberOfRounds) {
+    let initialResult = [0, 0];
+
     for (let round = 0; round < numberOfRounds; round++) {
         const playerSelection = prompt("Rock, Paper, or Scissors?");
         const computerSelection = getComputerChoice();
-        let roundResult = playRound(playerSelection, computerSelection);
+        var [roundResult, gameResult] = playRound(playerSelection, computerSelection, initialResult);
+        initialResult = gameResult;
         console.log(`Round ${round + 1}: ${roundResult}`);
     }
+    console.log(gameResult);
 }
 
 
