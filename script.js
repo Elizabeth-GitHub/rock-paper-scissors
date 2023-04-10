@@ -25,6 +25,22 @@ function finalScore(currentResult, currentScore) {
     return currentScore;
 }
 
+function finalMessage(score) {
+    let playerResult = score[0];
+    let computerResult = score[1];
+    let verdict = "Draw!";
+    let finalResult = `${score[0]} : ${score[1]}`;
+
+
+    if (playerResult > computerResult) {
+        verdict = "You win!";
+    }
+    else if (playerResult < computerResult) {
+        verdict = "You lose!";
+    }
+    return [verdict, finalResult];
+}
+
 
 function getFinalAnswer(gameResult, playerChoice, computerChoice) {
     let detailedResult = gameResult;
@@ -87,6 +103,7 @@ function playRound(playerSelection, computerSelection, previousResult) {
 
 function game(numberOfRounds) {
     let initialResult = [0, 0];
+    let farewell = "Game Over!";
 
     for (let round = 0; round < numberOfRounds; round++) {
         const playerSelection = prompt("Rock, Paper, or Scissors?");
@@ -95,7 +112,11 @@ function game(numberOfRounds) {
         initialResult = gameResult;
         console.log(`Round ${round + 1}: ${roundResult}`);
     }
-    console.log(gameResult);
+    finalMessage = finalMessage(gameResult);
+
+    console.log(farewell);
+    console.log(finalMessage[0]) // Verdict
+    console.log(finalMessage[1]); // Result
 }
 
 
