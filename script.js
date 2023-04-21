@@ -1,12 +1,75 @@
-function getComputerChoice() {
-    let options = ["Rock", "Paper", "Scissors"];
+function getComputerSelection() {
+    const options = ['rock', 'paper', 'scissors'];
     let choice = options[Math.floor(Math.random() * options.length)];
-    console.log(choice)
+    console.log(`computer selection: ${choice}`);
+
     return choice
 }
 
 
-function sameRegister(str) {
+function getRoundResult(roundResult, playerSign, computerSign) {
+    let detailedResult = roundResult;
+
+    if (roundResult === "You win! ") {
+        detailedResult += `${playerSign} ${playerSign === "Scissors" ? "beat" : "beats"} ${
+            computerSign}`;
+    }
+    else {
+        detailedResult += `${computerSign} ${computerSign === "Scissors" ? "beat" : "beats"} ${
+            playerSign}`;
+    }
+    return detailedResult;
+}
+
+function playRound(playerSelection) {
+    const computerSelection = getComputerSelection();
+    let answer = "";
+    let finalAnswer = "";
+
+    if (playerSelection === computerSelection) {
+        finalAnswer = `Draw! You both have selected ${playerSelection}`;
+    }
+    else {
+        switch (playerSelection) {
+            case "rock":
+                if (computerSelection === "paper") {
+                    answer = "You lose! ";
+                }
+                else {
+                    answer = "You win! ";
+                }
+                break;
+            case "paper":
+                if (computerSelection === "rock") {
+                    answer = "You win! ";
+                }
+                else {
+                    answer = "You lose! ";
+                }
+                break;
+            case "scissors":
+                if (computerSelection === "rock") {
+                    answer = "You lose! ";
+                }
+                else {
+                    answer = "You win! ";
+                }
+                break;
+        }
+
+        finalAnswer= getRoundResult(answer, playerSelection, computerSelection);
+    }
+
+    //let allRoundsResult = finalScore(answer, previousResult);
+    //return [finalAnswer, allRoundsResult];
+    console.log(finalAnswer);
+    return finalAnswer;
+}
+
+   
+
+
+/*function sameRegister(str) {
     let correctRegister = str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 
     return correctRegister;
@@ -101,12 +164,12 @@ function playRound(playerSelection, computerSelection, previousResult) {
 }
 
 
-function game(numberOfRounds) {
+/*function game(numberOfRounds) {
     let initialResult = [0, 0];
     let farewell = "Game Over!";
 
     for (let round = 0; round < numberOfRounds; round++) {
-        const playerSelection = prompt("Rock, Paper, or Scissors?");
+        //const playerSelection = prompt("Rock, Paper, or Scissors?");
         const computerSelection = getComputerChoice();
         var [roundResult, gameResult] = playRound(playerSelection, computerSelection, initialResult);
         initialResult = gameResult;
@@ -121,4 +184,28 @@ function game(numberOfRounds) {
 
 
 const rounds = 5;
-game(rounds);
+game(rounds);*/
+
+const buttonRock = document.getElementById('buttonRock');
+const buttonPaper= document.getElementById('buttonPaper');
+const buttonScissors= document.getElementById('buttonScissors');
+
+let playerChoice = ''
+
+buttonRock.addEventListener('click', function() {
+    playerChoice = buttonRock.textContent.toLowerCase();
+    console.log(`player selection: ${playerChoice}`);
+    playRound(playerChoice);
+});
+
+buttonPaper.addEventListener('click', function() {
+    playerChoice = buttonPaper.textContent.toLowerCase();
+    console.log(`player selection: ${playerChoice}`);
+    playRound(playerChoice);
+});
+
+buttonScissors.addEventListener('click', function() {
+    playerChoice = buttonScissors.textContent.toLowerCase();
+    console.log(`player selection: ${playerChoice}`);
+    playRound(playerChoice);
+});
