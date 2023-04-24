@@ -70,13 +70,16 @@ function playRound(playerSelection) {
 
 function playGame() {
     let playerScore = 0;
-    let computerScore = 0; 
+    let computerScore = 0;
+    let currentRound = 1; 
 
     buttons.forEach(button => {
         button.addEventListener('click', (event) => {
             const playerChoice = event.target.textContent.toLowerCase();
             const resultCurrent = playRound(playerChoice);
 
+            numberRound.innerText = `ROUND ${currentRound}`;
+            currentRound ++; 
             choicePlayer.innerText = `Your choice: ${capitaliseFirstLetter(playerChoice)}`;
 
             if (resultCurrent.startsWith('You win!')) {
@@ -102,14 +105,16 @@ function playGame() {
                     finalVerdict.innerText = 'It\'s a tie!';
                 }
             }
-        });
+        });  
     });
-        }
+}
 
 const buttonRock = document.getElementById('buttonRock');
 const buttonPaper= document.getElementById('buttonPaper');
 const buttonScissors= document.getElementById('buttonScissors');
 const buttons = document.querySelectorAll('.button');
+const numberRound = document.createElement('div');
+document.body.appendChild(numberRound);
 const choicePlayer = document.createElement('div')
 document.body.appendChild(choicePlayer);
 const choiceComputer = document.createElement('div');
