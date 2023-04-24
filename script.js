@@ -18,12 +18,12 @@ function getRoundResult(roundResult, playerSign, computerSign) {
     let detailedResult = roundResult;
 
     if (roundResult === "You win! ") {
-        detailedResult += `${playerSign} ${playerSign === "scissors" ? "beat" : "beats"} ${
-            computerSign}`;
+        detailedResult += `${capitaliseFirstLetter(playerSign)} ${playerSign === "scissors" ? "beat" : "beats"} ${
+            capitaliseFirstLetter(computerSign)}`;
     }
     else {
-        detailedResult += `${computerSign} ${computerSign === "scissors" ? "beat" : "beats"} ${
-            playerSign}`;
+        detailedResult += `${capitaliseFirstLetter(computerSign)} ${computerSign === "scissors" ? "beat" : "beats"} ${
+            capitaliseFirstLetter(playerSign)}`;
     }
     return detailedResult;
 }
@@ -67,7 +67,7 @@ function playRound(playerSelection) {
         finalAnswer= getRoundResult(answer, playerSelection, computerSelection);
     }
 
-    console.log(finalAnswer);
+    displayRoundResult(finalAnswer);
     return finalAnswer;
 }
 
@@ -75,11 +75,38 @@ function playGame() {
     let playerScore = 0;
     let computerScore = 0; 
 
-    while (playerScore < 5 && computerScore < 5) {
+    buttons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            const playerChoice = event.target.textContent.toLowerCase();
+            const resultCurrent = playRound(playerChoice);
 
+            choicePlayer.innerText = `Your choice: ${capitaliseFirstLetter(playerChoice)}`;
 
-    }
-}
+            if (resultCurrent.startsWith('You win!')) {
+                playerScore++;
+            }
+            else if (resultCurrent.startsWith('You lose!')) {
+                computerScore++;
+            }
+            else {
+                playerScore++;
+                computerScore++;
+            }
+
+            if (playerScore === 5 || computerScore === 5) {
+                if (playerScore > computerScore) {
+                    console.log('Congratulations, you win!');
+                }
+                else if (computerScore > playerScore) {
+                    console.log('Sorry, you lose!');
+                }
+                else {
+                    console.log('It\'s a tie!');
+                }
+            }
+        });
+    });
+        }
 
 const buttonRock = document.getElementById('buttonRock');
 const buttonPaper= document.getElementById('buttonPaper');
@@ -90,24 +117,14 @@ document.body.appendChild(choicePlayer);
 const choiceComputer = document.createElement('div');
 document.body.appendChild(choiceComputer);
 const resultRound= document.createElement('div');
-document.body.appendChild(resultRound);
+document.body.appendChild(resultRound);playGame
 
 function displayRoundResult(result) {
     resultRound.innerText = result;
   };
 
-function handleClick(event) {
-    const playerChoice = event.target.textContent.toLowerCase();
-    const computerChoice = getComputerSelection();
-    const roundResult = playRound(playerChoice, computerChoice);
-
-    choicePlayer.innerText = `Your choice: ${playerChoice[0].toUpperCase() + playerChoice.slice(1,)}`;
-}
-
 function displaySignPlayer(signPlayer) {
     choicePlayer.innerText = `Your choice: ${capitaliseFirstLetter(signPlayer)}}`;
 };
-  
-buttons.forEach(button => {
-    button.addEventListener('click', handleClick);
-});
+
+playGame();
