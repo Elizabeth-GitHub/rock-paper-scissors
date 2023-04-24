@@ -1,7 +1,8 @@
 function getComputerSelection() {
     const options = ['rock', 'paper', 'scissors'];
     let choice = options[Math.floor(Math.random() * options.length)];
-    console.log(`computer selection: ${choice}`);
+    displaySignComputer(choice);
+    //console.log(`computer selection: ${choice}`);
 
     return choice
 }
@@ -11,11 +12,11 @@ function getRoundResult(roundResult, playerSign, computerSign) {
     let detailedResult = roundResult;
 
     if (roundResult === "You win! ") {
-        detailedResult += `${playerSign} ${playerSign === "Scissors" ? "beat" : "beats"} ${
+        detailedResult += `${playerSign} ${playerSign === "scissors" ? "beat" : "beats"} ${
             computerSign}`;
     }
     else {
-        detailedResult += `${computerSign} ${computerSign === "Scissors" ? "beat" : "beats"} ${
+        detailedResult += `${computerSign} ${computerSign === "scissors" ? "beat" : "beats"} ${
             playerSign}`;
     }
     return detailedResult;
@@ -189,23 +190,53 @@ game(rounds);*/
 const buttonRock = document.getElementById('buttonRock');
 const buttonPaper= document.getElementById('buttonPaper');
 const buttonScissors= document.getElementById('buttonScissors');
+const choicePlayer = document.createElement('div')
+document.body.appendChild(choicePlayer);
+const choiceComputer = document.createElement('div');
+document.body.appendChild(choiceComputer);
+const resultRound= document.createElement('div');
+document.body.appendChild(resultRound);
 
 let playerChoice = ''
 
+function displayRoundResult(result) {
+    resultRound.innerText = result;
+  };
+
+function displaySignPlayer(signPlayer) {
+    choicePlayer.innerText = `You choice: ${signPlayer}`;
+};
+
+function displaySignComputer(signComputer) {
+    choiceComputer.innerText = `Computer's choice: ${signComputer}`;
+};
+
 buttonRock.addEventListener('click', function() {
     playerChoice = buttonRock.textContent.toLowerCase();
-    console.log(`player selection: ${playerChoice}`);
-    playRound(playerChoice);
+    //console.log(`player selection: ${playerChoice}`);
+    //playRound(playerChoice);
+    displaySignPlayer(playerChoice);
+    const resultRock = playRound(playerChoice);
+    displayRoundResult(resultRock);
 });
 
 buttonPaper.addEventListener('click', function() {
     playerChoice = buttonPaper.textContent.toLowerCase();
     console.log(`player selection: ${playerChoice}`);
-    playRound(playerChoice);
+    //playRound(playerChoice);
+    displaySignPlayer(playerChoice);
+    const resultPaper = playRound(playerChoice);
+    displayRoundResult(resultPaper);
 });
 
 buttonScissors.addEventListener('click', function() {
     playerChoice = buttonScissors.textContent.toLowerCase();
     console.log(`player selection: ${playerChoice}`);
-    playRound(playerChoice);
+    //playRound(playerChoice);
+    displaySignPlayer(playerChoice);
+    const resultScissors = playRound(playerChoice);
+    displayRoundResult(resultScissors);
 });
+
+
+
