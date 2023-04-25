@@ -1,3 +1,13 @@
+function disableButton(buttonToDisable) {
+    buttonToDisable.disabled = true;
+    buttonToDisable.style.display = 'none';
+};
+
+function enableButton(buttonToEnable) {
+    buttonToEnable.disabled = false;
+    buttonToEnable.style.display = 'flex';
+}
+
 function getComputerSelection() {
     const options = ['rock', 'paper', 'scissors'];
     let choice = options[Math.floor(Math.random() * options.length)];
@@ -64,66 +74,191 @@ function playRound(playerSelection) {
         finalAnswer= getRoundResult(answer, playerSelection, computerSelection);
     }
     resultRound.innerText = finalAnswer;
-
     return finalAnswer;
 };
 
-function playGame() {
+/*function playGame() {
     let playerScore = 0;
     let computerScore = 0;
-    let currentRound = 1; 
+    let currentRound = 1;
+
+    scoreCurrent.innerText = `Score: ${playerScore} : ${computerScore}`;
 
     buttons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            const playerChoice = event.target.textContent.toLowerCase();
-            const resultCurrent = playRound(playerChoice);
+    button.addEventListener('click', (event) => {
+        const playerChoice = event.target.textContent.toLowerCase();
+        const resultCurrent = playRound(playerChoice);
+        
+        numberRound.innerText = `ROUND ${currentRound}`;
+        currentRound++;
+        choicePlayer.innerText = `Your choice: ${capitaliseFirstLetter(playerChoice)}`;
 
-            numberRound.innerText = `ROUND ${currentRound}`;
-            currentRound ++; 
-            choicePlayer.innerText = `Your choice: ${capitaliseFirstLetter(playerChoice)}`;
+        if (resultCurrent.startsWith('You win!')) {
+            playerScore++;
+        } 
+        else if (resultCurrent.startsWith('You lose!')) {
+            computerScore++;
+        } 
+        else {
+            playerScore++;
+            computerScore++;
+        };
+        scoreCurrent.innerText = `Score: ${playerScore} : ${computerScore}`;
 
-            if (resultCurrent.startsWith('You win!')) {
-                playerScore++;
-            }
-            else if (resultCurrent.startsWith('You lose!')) {
-                computerScore++;
-            }
-            else {
-                playerScore++;
-                computerScore++;
-            }
+        if (playerScore === 5 || computerScore === 5) {
+            finalResult.innerText = `FINAL SCORE: ${playerScore} : ${computerScore}`;
+        if (playerScore > computerScore) {
+            finalVerdict.innerText = 'Congratulations, you win!';
+        } else if (computerScore > playerScore) {
+            finalVerdict.innerText = 'Sorry, you lose!';
+        } else {
+            finalVerdict.innerText = 'It\'s a tie!';
+        }
 
-            if (playerScore === 5 || computerScore === 5) {
-                finalResult.innerText = `FINAL SCORE: ${playerScore} : ${computerScore}`;
-                if (playerScore > computerScore) {
-                    finalVerdict.innerText = 'Congratulations, you win!';
-                }
-                else if (computerScore > playerScore) {
-                    finalVerdict.innerText = 'Sorry, you lose!';
-                }
-                else {
-                    finalVerdict.innerText = 'It\'s a tie!';
-                }
-            }
-        });  
+        // Disable the buttons to prevent further play
+        buttons.forEach(button => {
+            button.disabled = true;
+        });
+
+        // Display the new game or close
+        buttonNewGame.style.display = 'flex';
+        buttonNewGame.disabled = false;   
+        buttonClose.style.display = 'flex';
+        buttonClose.disabled = false;
+        messageFinal.style.display = 'flex';           
+        
+
+        // Add event listeners to the new game and close buttons
+        buttonNewGame.addEventListener('click', () => {
+            playGame()
+        });
+
+        buttonClose.addEventListener('click', () => {
+            containerFinal.remove();
+            containerRound.remove();
+        });
+        }
     });
+    });
+};*/
+
+let playerScore = 0;
+let computerScore = 0;
+let currentRound = 1;
+
+function resetGame() {
+  // Reset the scores and current round
+  playerScore = 0;
+  computerScore = 0;
+  currentRound = 1;
+
+  // Clear the result and final elements
+  resultRound.innerText = '';
+  finalResult.innerText = '';
+  finalVerdict.innerText = '';
+
+  // Enable the game buttons
+  buttonsChoice.forEach(button => {
+    button.disabled = false;
+  });
+
+  // Disable the new game button
+  buttonNewGame.disabled = true;
 }
 
-const buttonRock = document.getElementById('buttonRock');
-const buttonPaper= document.getElementById('buttonPaper');
-const buttonScissors= document.getElementById('buttonScissors');
-const buttons = document.querySelectorAll('.button');
-const numberRound = document.createElement('div');
-document.body.appendChild(numberRound);
-const choicePlayer = document.createElement('div')
-document.body.appendChild(choicePlayer);
-const choiceComputer = document.createElement('div');
-document.body.appendChild(choiceComputer);
-const resultRound= document.createElement('div');
-document.body.appendChild(resultRound);
-const finalResult = document.createElement('div');
-document.body.appendChild(finalResult);
-const finalVerdict = document.createElement('div');
-document.body.appendChild(finalVerdict);
+function playGame() {
+  // Call the resetGame function to reset the game
+  resetGame();
+
+  // Set the initial score text
+  scoreCurrent.innerText = `Score: ${playerScore} : ${computerScore}`;
+
+  buttonsChoice.forEach(button => {
+    button.addEventListener('click', (event) => {
+      const playerChoice = event.target.textContent.toLowerCase();
+      const resultCurrent = playRound(playerChoice);
+      
+      numberRound.innerText = `ROUND ${currentRound}`;
+      currentRound++;
+      choicePlayer.innerText = `Your choice: ${capitaliseFirstLetter(playerChoice)}`;
+
+      if (resultCurrent.startsWith('You win!')) {
+        playerScore++;
+      } 
+      else if (resultCurrent.startsWith('You lose!')) {
+        computerScore++;
+      } 
+      else {
+        playerScore++;
+        computerScore++;
+      };
+      scoreCurrent.innerText = `Score: ${playerScore} : ${computerScore}`;
+
+      if (playerScore === 5 || computerScore === 5) {
+        finalResult.innerText = `FINAL SCORE: ${playerScore} : ${computerScore}`;
+        if (playerScore > computerScore) {
+          finalVerdict.innerText = 'Congratulations, you win!';
+        } else if (computerScore > playerScore) {
+          finalVerdict.innerText = 'Sorry, you lose!';
+        } else {
+          finalVerdict.innerText = 'It\'s a tie!';
+        }
+
+        // Disable the buttons to prevent further play
+        buttonsChoice.forEach(button => {
+          button.disabled = true;
+        });
+
+        // Display the new game and close buttons
+        buttonNewGame.style.display = 'flex';
+        buttonNewGame.disabled = false;   
+        buttonClose.style.display = 'flex';
+        buttonClose.disabled = false;
+        messageFinal.style.display = 'flex';           
+      }
+    });
+  });
+};
+        
+const buttonsChoice = document.querySelectorAll('.buttonChoice');
+// Round information
+const containerRound = document.createElement('div');
+const containerChoices = document.createElement('div');
+const numberRound = document.createElement('p');
+const choicePlayer = document.createElement('p');
+const choiceComputer = document.createElement('p');
+const resultRound= document.createElement('p');
+const scoreCurrent = document.createElement('p');
+document.body.appendChild(containerRound);
+containerRound.appendChild(containerChoices);
+containerRound.appendChild(numberRound);
+containerChoices.appendChild(choicePlayer);
+containerChoices.appendChild(choiceComputer);
+containerRound.appendChild(resultRound);
+containerRound.appendChild(scoreCurrent);
+// Final information
+const containerFinal = document.createElement('div');
+const finalResult = document.createElement('p');
+const finalVerdict = document.createElement('p');
+const messageFinal = document.createElement('p');
+messageFinal.textContent = 'The game has ended. What would you like to do?';
+messageFinal.style.display = 'none';
+const buttonNewGame = document.createElement('button');
+buttonNewGame.textContent = 'New Game';
+disableButton(buttonNewGame);
+const buttonClose = document.createElement('button');
+buttonClose.textContent = 'Close';
+disableButton(buttonClose);
+document.body.appendChild(containerFinal);
+containerFinal.appendChild(finalResult);
+containerFinal.appendChild(finalVerdict);
+containerFinal.appendChild(messageFinal);
+containerFinal.appendChild(buttonNewGame);
+containerFinal.appendChild(buttonClose);
+
+// Add the event listener to the new game button
+buttonNewGame.addEventListener('click', () => {
+    playGame();
+  });
 
 playGame();
