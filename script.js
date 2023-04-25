@@ -8,13 +8,14 @@ function enableButton(buttonToEnable) {
     buttonToEnable.style.display = 'flex';
 };
 
-function disableMessage(messageToDisable) {
-    messageToDisable.style.display = 'none';
+function disableContainer(containerToDisable) {
+  containerToDisable.style.display = 'none';
 };
 
-function enableMessage(messageToEnable) {
-    messageToEnable.style.display = 'flex';
+function enableContainer(containerToEnable) {
+  containerToEnable.style.display = 'flex';
 };
+
 
 function getComputerSelection() {
     const options = ['rock', 'paper', 'scissors'];
@@ -162,12 +163,26 @@ function playGame() {
     });
   });
 };
+
+// PRESTART CONTENT
+const containerPreStart = document.createElement('div');
+const greetings = document.createElement('div');
+greetings.innerText = 'WELCOME TO ROCK-SCISSORS-PAPER!'
+const buttonStartGame = document.createElement('button');
+buttonStartGame.innerText = 'START';
+
+document.body.appendChild(containerPreStart);
+containerPreStart.appendChild(greetings);
+containerPreStart.appendChild(buttonStartGame);
         
 // MAIN CONTENT
 const containerMain = document.createElement('div');
 document.body.appendChild(containerMain);
 
 const buttonsChoice = document.querySelectorAll('.buttonChoice');
+buttonsChoice.forEach(button => {
+  containerMain.appendChild(button)
+});
 // Round information
 const containerRound = document.createElement('div');
 const containerChoices = document.createElement('div');
@@ -202,17 +217,19 @@ containerFinal.appendChild(finalVerdict);
 containerFinal.appendChild(messageFinal);
 containerFinal.appendChild(buttonNewGame);
 containerFinal.appendChild(buttonClose);
+disableContainer(containerMain);
 
 
 // CONTENT AFTER CLICKING THE 'CLOSE BUTTON'
 const containerAfterClose = document.createElement('div');
 const messageAfterClose = document.createElement('div');
-messageAfterClose.innerText = 'Thank you for the Game!';
-//disableMessage(messageAfterClose);
+const buttonMainContent = document.createElement('button'); ////
 
+messageAfterClose.innerText = 'Thank you for the Game!'
 document.body.appendChild(containerAfterClose);
 containerAfterClose.appendChild(messageAfterClose);
 containerAfterClose.style.display = 'none';
+disableContainer(containerAfterClose);
 
 
 
@@ -224,5 +241,10 @@ buttonClose.addEventListener('click', () => {
     containerMain.style.display = 'none';
     containerAfterClose.style.display = 'flex';
 });
+
+buttonStartGame.addEventListener('click', () => {
+  disableContainer(containerPreStart);
+  enableContainer(containerMain);
+})
 
 playGame();
