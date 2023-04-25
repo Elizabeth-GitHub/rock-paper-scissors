@@ -6,7 +6,15 @@ function disableButton(buttonToDisable) {
 function enableButton(buttonToEnable) {
     buttonToEnable.disabled = false;
     buttonToEnable.style.display = 'flex';
-}
+};
+
+function disableMessage(messageToDisable) {
+    messageToDisable.style.display = 'none';
+};
+
+function enableMessage(messageToEnable) {
+    messageToEnable.style.display = 'flex';
+};
 
 function getComputerSelection() {
     const options = ['rock', 'paper', 'scissors'];
@@ -76,71 +84,6 @@ function playRound(playerSelection) {
     resultRound.innerText = finalAnswer;
     return finalAnswer;
 };
-
-/*function playGame() {
-    let playerScore = 0;
-    let computerScore = 0;
-    let currentRound = 1;
-
-    scoreCurrent.innerText = `Score: ${playerScore} : ${computerScore}`;
-
-    buttons.forEach(button => {
-    button.addEventListener('click', (event) => {
-        const playerChoice = event.target.textContent.toLowerCase();
-        const resultCurrent = playRound(playerChoice);
-        
-        numberRound.innerText = `ROUND ${currentRound}`;
-        currentRound++;
-        choicePlayer.innerText = `Your choice: ${capitaliseFirstLetter(playerChoice)}`;
-
-        if (resultCurrent.startsWith('You win!')) {
-            playerScore++;
-        } 
-        else if (resultCurrent.startsWith('You lose!')) {
-            computerScore++;
-        } 
-        else {
-            playerScore++;
-            computerScore++;
-        };
-        scoreCurrent.innerText = `Score: ${playerScore} : ${computerScore}`;
-
-        if (playerScore === 5 || computerScore === 5) {
-            finalResult.innerText = `FINAL SCORE: ${playerScore} : ${computerScore}`;
-        if (playerScore > computerScore) {
-            finalVerdict.innerText = 'Congratulations, you win!';
-        } else if (computerScore > playerScore) {
-            finalVerdict.innerText = 'Sorry, you lose!';
-        } else {
-            finalVerdict.innerText = 'It\'s a tie!';
-        }
-
-        // Disable the buttons to prevent further play
-        buttons.forEach(button => {
-            button.disabled = true;
-        });
-
-        // Display the new game or close
-        buttonNewGame.style.display = 'flex';
-        buttonNewGame.disabled = false;   
-        buttonClose.style.display = 'flex';
-        buttonClose.disabled = false;
-        messageFinal.style.display = 'flex';           
-        
-
-        // Add event listeners to the new game and close buttons
-        buttonNewGame.addEventListener('click', () => {
-            playGame()
-        });
-
-        buttonClose.addEventListener('click', () => {
-            containerFinal.remove();
-            containerRound.remove();
-        });
-        }
-    });
-    });
-};*/
 
 let playerScore = 0;
 let computerScore = 0;
@@ -220,6 +163,10 @@ function playGame() {
   });
 };
         
+// MAIN CONTENT
+const containerMain = document.createElement('div');
+document.body.appendChild(containerMain);
+
 const buttonsChoice = document.querySelectorAll('.buttonChoice');
 // Round information
 const containerRound = document.createElement('div');
@@ -229,7 +176,7 @@ const choicePlayer = document.createElement('p');
 const choiceComputer = document.createElement('p');
 const resultRound= document.createElement('p');
 const scoreCurrent = document.createElement('p');
-document.body.appendChild(containerRound);
+containerMain.appendChild(containerRound);
 containerRound.appendChild(containerChoices);
 containerRound.appendChild(numberRound);
 containerChoices.appendChild(choicePlayer);
@@ -249,16 +196,33 @@ disableButton(buttonNewGame);
 const buttonClose = document.createElement('button');
 buttonClose.textContent = 'Close';
 disableButton(buttonClose);
-document.body.appendChild(containerFinal);
+containerMain.appendChild(containerFinal);
 containerFinal.appendChild(finalResult);
 containerFinal.appendChild(finalVerdict);
 containerFinal.appendChild(messageFinal);
 containerFinal.appendChild(buttonNewGame);
 containerFinal.appendChild(buttonClose);
 
-// Add the event listener to the new game button
+
+// CONTENT AFTER CLICKING THE 'CLOSE BUTTON'
+const containerAfterClose = document.createElement('div');
+const messageAfterClose = document.createElement('div');
+messageAfterClose.innerText = 'Thank you for the Game!';
+//disableMessage(messageAfterClose);
+
+document.body.appendChild(containerAfterClose);
+containerAfterClose.appendChild(messageAfterClose);
+containerAfterClose.style.display = 'none';
+
+
+
 buttonNewGame.addEventListener('click', () => {
     playGame();
   });
+
+buttonClose.addEventListener('click', () => {
+    containerMain.style.display = 'none';
+    containerAfterClose.style.display = 'flex';
+});
 
 playGame();
