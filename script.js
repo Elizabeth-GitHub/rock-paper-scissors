@@ -1,13 +1,3 @@
-/*function disableButton(buttonToDisable) {
-    buttonToDisable.disabled = true;
-    buttonToDisable.style.display = 'none';
-};
-
-function enableButton(buttonToEnable) {
-    buttonToEnable.disabled = false;
-    buttonToEnable.style.display = 'flex';
-};*/
-
 function disableContainer(containerToDisable) {
   containerToDisable.style.display = 'none';
 };
@@ -20,6 +10,11 @@ function showModalWindow() {
   containerModal.style.display = 'flex';
   contentModal.style.display = 'flex';
 };
+
+function hideModalWindow() {
+  containerModal.style.display = 'none';
+  contentModal.style.display = 'none';
+}
 
 function getComputerSelection() {
     const options = ['rock', 'paper', 'scissors'];
@@ -109,19 +104,24 @@ function resetGame() {
   buttonsChoice.forEach(button => {
     button.disabled = false;
   });
-}
-
-function playGame() {
-  // Call the resetGame function to reset the game
-  resetGame();
 
   // Set the initial score text
   scoreCurrent.innerText = `Score: ${playerScore} : ${computerScore}`;
+  numberRound.innerText = `ROUND ${currentRound}`;
+  playGame(playerScore, computerScore, currentRound); ///
+}
+
+function playGame(playerScore, computerScore, currentRound) {
+  // Call the resetGame function to reset the game
+  //resetGame();
+  console.log(`Score before the game: ${playerScore}, ${computerScore}`);
+  
 
   buttonsChoice.forEach(button => {
     button.addEventListener('click', (event) => {
       const playerChoice = event.target.textContent.toLowerCase();
       const resultCurrent = playRound(playerChoice);
+      console.log(resultCurrent);
       
       numberRound.innerText = `ROUND ${currentRound}`;
       currentRound++;
@@ -138,9 +138,11 @@ function playGame() {
         computerScore++;
       };
       scoreCurrent.innerText = `Score: ${playerScore} : ${computerScore}`;
+      console.log(`player score: ${playerScore}, computer score: ${computerScore}`);
 
       if (playerScore === 5 || computerScore === 5) {
         finalResult.innerText = `FINAL SCORE: ${playerScore} : ${computerScore}`;
+        console.log(finalResult);
         if (playerScore > computerScore) {
           finalVerdict.innerText = 'Congratulations, you win!';
         } else if (computerScore > playerScore) {
@@ -154,7 +156,8 @@ function playGame() {
           button.disabled = true;
         });
 
-        showModalWindow();       
+        showModalWindow();   
+        return;    
       }
     });
   });
@@ -163,10 +166,9 @@ function playGame() {
 // PRESTART CONTENT
 const containerPreStart = document.createElement('div');
 const greetings = document.createElement('div');
-greetings.innerText = 'WELCOME TO ROCK-SCISSORS-PAPER!'
 const buttonStartGame = document.createElement('button');
+greetings.innerText = 'WELCOME TO ROCK-SCISSORS-PAPER!'
 buttonStartGame.innerText = 'START';
-
 document.body.appendChild(containerPreStart);
 containerPreStart.appendChild(greetings);
 containerPreStart.appendChild(buttonStartGame);
@@ -197,17 +199,18 @@ containerRound.appendChild(resultRound);
 containerRound.appendChild(scoreCurrent);
 // Final information
 const containerModal = document.createElement('div');
-containerModal.setAttribute('id', 'modal-overlay');
 const contentModal = document.createElement('div');
-contentModal.setAttribute('id', 'modal');
+
 const finalResult = document.createElement('p');
 const finalVerdict = document.createElement('p');
 const messageFinal = document.createElement('p');
-messageFinal.textContent = 'The game has ended. What would you like to do?';
 const buttonNewGame = document.createElement('button');
-buttonNewGame.textContent = 'New Game';
 const buttonClose = document.createElement('button');
 buttonClose.textContent = 'Close';
+containerModal.setAttribute('id', 'modal-overlay');
+contentModal.setAttribute('id', 'modal');
+messageFinal.textContent = 'The game has ended. What would you like to do?';
+buttonNewGame.textContent = 'New Game';
 containerMain.appendChild(containerModal);
 containerModal.appendChild(contentModal);
 contentModal.appendChild(finalResult);
@@ -219,18 +222,20 @@ contentModal.appendChild(buttonClose);
 // CONTENT AFTER CLICKING THE 'CLOSE BUTTON'
 const containerAfterClose = document.createElement('div');
 const messageAfterClose = document.createElement('div');
-const buttonMainContent = document.createElement('button'); ////
-
+const buttonMainContent = document.createElement('button'); 
+buttonMainContent.innerText = 'COME BACK TO THE MAIN PAGE';
 messageAfterClose.innerText = 'Thank you for the Game!'
 document.body.appendChild(containerAfterClose);
 containerAfterClose.appendChild(messageAfterClose);
+containerAfterClose.appendChild(buttonMainContent);
 containerAfterClose.style.display = 'none';
 disableContainer(containerAfterClose);
 
 
 
 buttonNewGame.addEventListener('click', () => {
-    playGame();
+    hideModalWindow() 
+    resetGame();
   });
 
 buttonClose.addEventListener('click', () => {
@@ -243,4 +248,8 @@ buttonStartGame.addEventListener('click', () => {
   enableContainer(containerMain);
 });
 
-playGame();
+buttonMainContent.addEventListener('click', () => {
+  window.location.reload();
+});
+
+resetGame();
