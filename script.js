@@ -1,5 +1,9 @@
 //PRE-CONTENT
 const containerPreStart = document.createElement('div');
+const headerStart = document.createElement('h1');
+const containerImageStart = document.createElement('div');
+const imageStart = document.createElement('img');
+const textWelcome = document.createElement('p');
 const buttonStartGame = document.createElement('button');
 // MAIN CONTENT
 const containerMain = document.createElement('div');
@@ -20,6 +24,18 @@ let roundNumber = 1;
 
 containerPreStart.setAttribute('id', 'container-prestart');
 containerPreStart.setAttribute('class', 'containers-prestart containers');
+headerStart.setAttribute('id', 'main-headerstart');
+headerStart.setAttribute('class', 'main-header');
+containerImageStart.setAttribute('id', 'container-imageStart');
+containerImageStart.setAttribute('class', 'containers-prestart containers');
+headerStart.innerText = 'ROCK PAPER SCISSORS';
+imageStart.src = './images/photo-start.png';
+//imageStart.setAttribute('src', './images/photo-start.png');
+//imageStart.setAttribute('alt', 'A warm handshake');
+
+
+textWelcome.innerText = 'Welcome to the classic game of Rock Paper Scissors! In this game, you\'ll be playing against a computer opponent to see who can outsmart the other.\n\nThe rules are simple: on each turn, you and your opponent will choose one of three options - rock, paper, or scissors. Rock beats scissors, scissors beats paper, and paper beats rock. The winner of each round is determined by these rules.\n\nYou\'ll play a total of five rounds, and the player with the most wins at the end of the game is declared the winner. If there\'s a tie, the game will continue until there\'s a clear winner.\n\nDon\'t underestimate your computer opponent - it\'s programmed to make strategic choices, so you\'ll need to stay on your toes if you want to win! But with a bit of luck and some quick thinking, you can come out on top.\n\nSo, are you ready to face the challenge? Click the start button and let the game begin!';
+
 buttonStartGame.setAttribute('id', 'buttonStartGame');
 buttonStartGame.setAttribute('class', 'buttons');
 buttonStartGame.innerText = 'START GAME';
@@ -47,10 +63,14 @@ buttonHomePage.setAttribute('class', 'buttons-afterclose buttons');
 buttonHomePage.innerText = 'BACK TO HOME PAGE';
 buttonHomePage.disabled = true;
 
-
-
 document.body.appendChild(containerPreStart);
+containerPreStart.appendChild(headerStart);
+containerPreStart.appendChild(containerImageStart);
+containerPreStart.appendChild(textWelcome);
 containerPreStart.appendChild(buttonStartGame);
+containerImageStart.appendChild(imageStart);
+
+
 document.body.appendChild(containerMain);
 containerMain.appendChild(containerButtonsChoice);
 containerMain.appendChild(containerModal);
