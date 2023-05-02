@@ -6,7 +6,7 @@ const containerTextWelcome = document.createElement('div');
 const textWelcome = document.createElement('p');
 const containerImageStart = document.createElement('div');
 const imageStart = document.createElement('img');
-const containerTextReady = document.createElement('div');
+const containerBottomContent = document.createElement('div');
 const textReadyStart = document.createElement('p');
 const buttonStartGame = document.createElement('button');
 // MAIN CONTENT
@@ -22,6 +22,10 @@ const buttonClose = document.createElement('button');
 const containerAfterClose = document.createElement('div');
 const buttonHomePage = document.createElement('button');
 
+const containerFooter = document.createElement('div');
+const creator = document.createElement('p');
+const credits = document.createElement('p');
+
 let playerScore = 0;
 let computerScore = 0;
 let roundNumber = 1; 
@@ -34,8 +38,8 @@ containerTextWelcome.setAttribute('id', 'container-textwelcome');
 containerTextWelcome.setAttribute('class', 'containers-prestart containers');
 containerImageStart.setAttribute('id', 'container-imagestart');
 containerImageStart.setAttribute('class', 'containers-prestart containers');
-containerTextReady.setAttribute('id', 'container-text-ready');
-containerTextReady.setAttribute('class', 'containers-prestart containers');
+containerBottomContent.setAttribute('id', 'container-text-ready');
+containerBottomContent.setAttribute('class', 'containers-prestart containers');
 headerStart.setAttribute('id', 'main-headerstart');
 headerStart.setAttribute('class', 'main-header');
 headerStart.innerText = 'ROCK PAPER SCISSORS';
@@ -78,17 +82,23 @@ buttonHomePage.setAttribute('id', 'button-homepage');
 buttonHomePage.setAttribute('class', 'buttons-afterclose buttons');
 buttonHomePage.innerText = 'BACK TO HOME PAGE';
 buttonHomePage.disabled = true;
+containerFooter.setAttribute('id', 'container-footer');
+containerFooter.setAttribute('class', 'containers');
+creator.innerText = 'Created by Elizabeth Developer';
+credits.innerText = 'All images used in this project were generated using the Canva AI Image Generator.';
+
 
 document.body.appendChild(containerPreStart);
 containerPreStart.appendChild(containerHeaderStart);
 containerPreStart.appendChild(containerTextWelcome);
 containerPreStart.appendChild(containerImageStart);
-containerPreStart.appendChild(containerTextReady);
+containerPreStart.appendChild(containerBottomContent);
 containerHeaderStart.appendChild(headerStart);
 containerTextWelcome.appendChild(textWelcome);
 containerPreStart.appendChild(buttonStartGame);
 containerImageStart.appendChild(imageStart);
-containerTextReady.appendChild(textReadyStart);
+containerBottomContent.appendChild(textReadyStart);
+containerBottomContent.appendChild(buttonStartGame);
 
 
 document.body.appendChild(containerMain);
@@ -99,6 +109,10 @@ contentModal.appendChild(buttonNewGame);
 contentModal.appendChild(buttonClose);
 document.body.appendChild(containerAfterClose);
 containerAfterClose.appendChild(buttonHomePage);
+
+document.body.appendChild(containerFooter);
+containerFooter.appendChild(creator);
+containerFooter.appendChild(credits);
 
 buttonStartGame.addEventListener('click', () => {
   containerPreStart.style.display = 'none';
