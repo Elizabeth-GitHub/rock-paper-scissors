@@ -3,13 +3,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /*border: .4rem solid #F2AC29;*/
-    position: relative;
+    border: .4rem solid #F2AC29;
     font-family: 'Lobster', cursive, sans-serif;
-    padding: 0%;
-    margin-top: 0%;
-    margin-bottom: 0%;
-    line-height: 0.25em;
+    padding: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    line-height: 0;
 }
 
 .main-header {
@@ -29,6 +28,8 @@
     font-size: 2.5rem;
     text-align: center;
     line-height: 36px;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 .buttons {
@@ -40,7 +41,6 @@
     transition: all 0.07s ease;
     text-align: center;
     color: #A303A6;
-    /*background: #F205CB;*/
     margin-top: 0;
 }
 
@@ -76,13 +76,15 @@
     justify-content: center;
 }
 
+#container-footer {
+    
+    position: absolute;
+    bottom: 0;
+}
+
 body {
     background-color: #F2EBDC;
 }
 
-
-#container-imagestart {
-    
-}
 
 
