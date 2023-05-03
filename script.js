@@ -11,8 +11,9 @@ const textReadyStart = document.createElement('p');
 const buttonStartGame = document.createElement('button');
 // MAIN CONTENT
 const containerMain = document.createElement('div');
+const containerRules = document.createElement('div');
 const containerButtonsChoice = document.getElementById('buttons-container');;
-const buttonsChoice = document.querySelectorAll('.buttonsChoice');
+const buttonsChoice = document.querySelectorAll('.buttons-choice');
 // MODAL WINDOW
 const containerModal = document.createElement('div');
 const contentModal = document.createElement('div');
@@ -21,11 +22,11 @@ const buttonClose = document.createElement('button');
 // CONTENT AFTER 'CLOSE' BUTTON
 const containerAfterClose = document.createElement('div');
 const buttonHomePage = document.createElement('button');
-
+//FOOTER
 const containerFooter = document.createElement('div');
 const creator = document.createElement('p');
 const credits = document.createElement('p');
-
+//PLAY VARIABLES
 let playerScore = 0;
 let computerScore = 0;
 let roundNumber = 1; 
@@ -62,7 +63,6 @@ buttonStartGame.innerText = 'START GAME';
 containerMain.setAttribute('id', 'container-main');
 containerMain.setAttribute('class', 'containers-main containers');
 containerMain.style.display = 'none';
-containerMain.appendChild(containerModal);
 containerModal.setAttribute('id', 'container-modal');
 containerModal.setAttribute('class', 'containers-modal containers');
 contentModal.setAttribute('id', 'content-modal');
