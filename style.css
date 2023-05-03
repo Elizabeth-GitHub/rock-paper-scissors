@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: .4rem solid #F2AC29;
+    /*border: .4rem solid #F2AC29;*/
     font-family: 'Lobster', cursive, sans-serif;
     padding: 0px;
     margin-top: 0px;
@@ -17,8 +17,8 @@
     font-style: italic;
     font-weight: 800;
     text-align: justify;
-    margin-top: 3.5%;
-    margin-bottom: 2.5%;
+    margin-top: 4;
+    margin-bottom: 3;
     color: #F20544;
 }
 
@@ -44,8 +44,18 @@
     margin-top: 0;
 }
 
+.text-footer {
+    font-size: 0.75rem;
+    color: #03A678;
+    line-height: 6px;
+    margin-bottom: 0.5rem;
+    margin-top: 0rem;
+}
+
 #container-imagestart #image-start{
-    max-height: 27vw;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    max-height: 28vw;
     border: .4rem solid #F205CB;
 }
 
@@ -77,9 +87,11 @@
 }
 
 #container-footer {
-    
     position: absolute;
     bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
 }
 
 body {

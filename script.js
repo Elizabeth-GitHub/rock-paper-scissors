@@ -84,7 +84,11 @@ buttonHomePage.innerText = 'BACK TO HOME PAGE';
 buttonHomePage.disabled = true;
 containerFooter.setAttribute('id', 'container-footer');
 containerFooter.setAttribute('class', 'containers');
+creator.setAttribute('id', 'creator');
+creator.setAttribute('class', 'text-footer');
 creator.innerText = 'Created by Elizabeth Developer';
+credits.setAttribute('id', 'credits');
+credits.setAttribute('class', 'text-footer');
 credits.innerText = 'All images used in this project were generated using the Canva AI Image Generator.';
 
 
