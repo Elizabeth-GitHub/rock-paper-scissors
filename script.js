@@ -12,8 +12,17 @@ const buttonStartGame = document.createElement('button');
 // MAIN CONTENT
 const containerMain = document.createElement('div');
 const containerRules = document.createElement('div');
+const rules = document.createElement('p');
+const containerLetsStart = document.createElement('div');
+const textMakeChoice = document.createElement('p');
 const containerButtonsChoice = document.getElementById('buttons-container');;
+const containerInformationRound = document.createElement('div');
 const buttonsChoice = document.querySelectorAll('.buttons-choice');
+const numberRound = document.createElement('h2');
+const choicePlayer = document.createElement('p');
+const choiceComputer = document.createElement('p');
+const resultRound = document.createElement('h3');
+let textLetsStart = document.createElement('h1');
 // MODAL WINDOW
 const containerModal = document.createElement('div');
 const contentModal = document.createElement('div');
@@ -54,15 +63,36 @@ imageStart.setAttribute('class', 'image');
 textReadyStart.setAttribute('id', 'text-readystart');
 textReadyStart.setAttribute('class', 'text-start');
 textReadyStart.innerText =  'Ready to face the challenge?\nClick the start button and let the game begin!'
-/*\n\nThe rules are simple: on each turn, you and your opponent will choose one of three options - rock, paper, or scissors. Rock beats scissors, scissors beats paper, and paper beats rock. The winner of each round is determined by 
-these rules.\n\nYou\'ll play a total of five rounds, and the player with the most wins at the end of the game is declared the winner. If there\'s a tie, the game will continue until there\'s a clear winner.\n\n
-Don\'t underestimate your computer opponent - it\'s programmed to make strategic choices, so you\'ll need to stay on your toes if you want to win! But with a bit of luck and some quick thinking, you can come out on top.\n\n';*/
 buttonStartGame.setAttribute('id', 'buttonStartGame');
 buttonStartGame.setAttribute('class', 'buttons');
 buttonStartGame.innerText = 'START GAME';
+//
 containerMain.setAttribute('id', 'container-main');
 containerMain.setAttribute('class', 'containers-main containers');
 containerMain.style.display = 'none';
+containerRules.setAttribute('id', 'container-rules');
+containerRules.setAttribute('class', 'containers-playpage containers');
+rules.setAttribute('id', 'rules');
+rules.setAttribute('class', 'text-playpage');
+rules.innerHTML = '<div style="text-align:center;"><strong style="border-bottom: 2px solid #F21905;">The rules are simple:</strong></div>On each turn, you and your opponent will choose one of three options - rock, paper, or scissors.<br>\
+                  Rock beats scissors, scissors beats paper, and paper beats rock.\nThe winner of each round is determined by these rules.<br>\
+                  You\'ll play a total of <span style="color:#F21905">five</span> rounds, and the player with the most wins at the end of the game is declared the winner.<br>\
+                  If there\'s a tie, the game will continue until there\'s a clear winner.'; 
+containerLetsStart.setAttribute('id', 'container-letsstart');
+containerLetsStart.setAttribute('class', 'containers-playpage containers');
+textLetsStart.setAttribute('id', 'text-letsstart');
+textLetsStart.setAttribute('class', 'text-playpage');
+textLetsStart.innerText = 'LET\'S START!'
+textMakeChoice.setAttribute('id', 'text-makechoice');
+textMakeChoice.setAttribute('class', 'text-playpage');
+textMakeChoice.innerText = 'MAKE YOUR CHOICE:'
+containerInformationRound.setAttribute('id', 'container-informationround');
+containerInformationRound.setAttribute('class', 'comtainers-playpage containers');
+numberRound.setAttribute('class', 'text-playpage text-informationround');
+choicePlayer.setAttribute('class', 'text-playpage choices text-informationround');
+choiceComputer.setAttribute('class', 'text-playpage choices text-informationround');
+resultRound.setAttribute('id', 'round-result');
+resultRound.setAttribute('class', 'text-playpage choices text-informationround');
 containerModal.setAttribute('id', 'container-modal');
 containerModal.setAttribute('class', 'containers-modal containers');
 contentModal.setAttribute('id', 'content-modal');
@@ -91,7 +121,6 @@ credits.setAttribute('id', 'credits');
 credits.setAttribute('class', 'text-footer');
 credits.innerText = 'All images used in this project were generated using the Canva AI Image Generator.';
 
-
 document.body.appendChild(containerPreStart);
 containerPreStart.appendChild(containerHeaderStart);
 containerPreStart.appendChild(containerTextWelcome);
@@ -103,14 +132,24 @@ containerPreStart.appendChild(buttonStartGame);
 containerImageStart.appendChild(imageStart);
 containerBottomContent.appendChild(textReadyStart);
 containerBottomContent.appendChild(buttonStartGame);
-
-
+//
 document.body.appendChild(containerMain);
+containerMain.appendChild(containerRules);
+containerMain.appendChild(containerLetsStart);
 containerMain.appendChild(containerButtonsChoice);
+containerMain.appendChild(containerInformationRound);
 containerMain.appendChild(containerModal);
+containerRules.appendChild(rules);
+containerLetsStart.appendChild(textLetsStart);
+containerLetsStart.appendChild(textMakeChoice);
+containerInformationRound.appendChild(numberRound);
+containerInformationRound.appendChild(choicePlayer);
+containerInformationRound.appendChild(choiceComputer);
+containerInformationRound.appendChild(resultRound);
 containerModal.appendChild(contentModal);
 contentModal.appendChild(buttonNewGame);
 contentModal.appendChild(buttonClose);
+
 document.body.appendChild(containerAfterClose);
 containerAfterClose.appendChild(buttonHomePage);
 
@@ -131,16 +170,33 @@ buttonNewGame.addEventListener('click', newGame);
 buttonClose.addEventListener('click', moveToCloseContent);
 buttonHomePage.addEventListener('click', moveToMainPage);
 
+function changeLetsStart(round) {
+  if (round === 1) {
+    return textLetsStart.innerText = 'LET\'S START!' ;
+  }
+  else if (round === 2) {
+    textLetsStart.innerText = 'ONE MORE ROUND!' ;
+  }
+};
+
 function disableButtonsChoice() {
   buttonsChoice.forEach(button => {
     button.disabled = true;;
   })
-}
+};
 
 function enableButtonsChoice() {
   buttonsChoice.forEach(button => {
     button.disabled = false;;
   })
+};
+
+function disableContainer(containerToDisable) {
+  containerToDisable.style.display = 'none';
+};
+
+function enableContainer(containerToEnable) {
+  containerToEnable.style.display = 'flex';
 };
 
 function showModalWindow() {
@@ -155,6 +211,7 @@ function hideModalWindow() {
   contentModal.style.display = 'none';
   buttonNewGame.disabled = true;
   buttonClose.disabled = true;
+  disableContainer(containerInformationRound);
 }
 
 function moveToCloseContent() {
@@ -210,6 +267,7 @@ function newGame(){
   
   enableButtonsChoice();
   hideModalWindow();
+  changeLetsStart(roundNumber);
 };
 
 function playGame(playerSign) {
@@ -220,6 +278,9 @@ function playGame(playerSign) {
   console.log(`Round: ${roundNumber}`);
   console.log(`Your choice: ${capitaliseFirstLetter(playerSign)}`);
   console.log(`Computer choice: ${capitaliseFirstLetter(computerSign)}`);
+  numberRound.innerText = `ROUND ${roundNumber} RESULT:`;
+  choicePlayer.innerHTML = `Your choice: ${capitaliseFirstLetter(playerSign)}`;
+  choiceComputer.innerHTML = `Computer choice: ${capitaliseFirstLetter(computerSign)}`;
 
   if (playerSign !== computerSign) {
     switch (playerSign) {
@@ -252,10 +313,12 @@ function playGame(playerSign) {
   }
   
   updateScore(roundResult);
+  enableContainer(containerInformationRound);
   roundNumber++;
-
+  changeLetsStart(roundNumber);
   console.log('Round result:',roundResult, roundComment);
   console.log(`Player score: ${playerScore}\nComputer score: ${computerScore}`);
+  resultRound.innerText = `${roundResult}\n${roundComment}`;
 
   if (playerScore === 5 || computerScore === 5) {
     console.log('Game Over!');
