@@ -19,6 +19,7 @@ const containerButtonsChoice = document.getElementById('buttons-container');;
 const containerInformationRound = document.createElement('div');
 const buttonsChoice = document.querySelectorAll('.buttons-choice');
 const numberRound = document.createElement('h2');
+const containerChoices = document.createElement('div');
 const choicePlayer = document.createElement('p');
 const choiceComputer = document.createElement('p');
 const resultRound = document.createElement('h3');
@@ -26,6 +27,19 @@ let textLetsStart = document.createElement('h1');
 // MODAL WINDOW
 const containerModal = document.createElement('div');
 const contentModal = document.createElement('div');
+const containerGameResult = document.createElement('div');
+const textGameOver = document.createElement('h2');
+/*const textGameResult = document.createElement('p');
+const textGameComment = document.createElement('p');*/
+const tableResult = document.createElement('table');
+const thead = document.createElement('thead');
+const tbody = document.createElement('tbody');
+const tableResultHeaderRow= document.createElement('tr');
+const tableResultHeaderPlayer = document.createElement('th');
+const tableResultHeaderComputer = document.createElement('th');
+const tableResultDataRow = document.createElement('tr');
+const tableResultDataPlayer = document.createElement('td');
+const tableResultDataComputer = document.createElement('td');
 const buttonNewGame = document.createElement('button');
 const buttonClose = document.createElement('button');
 // CONTENT AFTER 'CLOSE' BUTTON
@@ -89,14 +103,30 @@ textMakeChoice.innerText = 'MAKE YOUR CHOICE:'
 containerInformationRound.setAttribute('id', 'container-informationround');
 containerInformationRound.setAttribute('class', 'comtainers-playpage containers');
 numberRound.setAttribute('class', 'text-playpage text-informationround');
+containerChoices.setAttribute('id', 'container-choices');
+containerChoices.setAttribute('class', 'containers-playpage containers');
 choicePlayer.setAttribute('class', 'text-playpage choices text-informationround');
 choiceComputer.setAttribute('class', 'text-playpage choices text-informationround');
 resultRound.setAttribute('id', 'round-result');
-resultRound.setAttribute('class', 'text-playpage choices text-informationround');
+resultRound.setAttribute('class', 'text-playpage text-informationround');
+//
 containerModal.setAttribute('id', 'container-modal');
 containerModal.setAttribute('class', 'containers-modal containers');
 contentModal.setAttribute('id', 'content-modal');
 contentModal.setAttribute('class', 'containers-modal containers');
+containerGameResult.setAttribute('id', 'container-gameresult');
+containerGameResult.setAttribute('class', 'containers');
+textGameOver.setAttribute('id', 'text-gameover');
+textGameOver.setAttribute('class', 'text-modal');
+textGameOver.innerText = 'GAME OVER!';
+/*textGameResult.setAttribute('id', 'text-gameresult');
+textGameResult.setAttribute('class', 'text-modal');*/
+tableResultHeaderPlayer.textContent = 'YOU';
+tableResultHeaderComputer.textContent = 'COMPUTER';
+tableResultDataPlayer.textContent = '0';
+tableResultDataComputer.textContent = '1';
+/*textGameComment.setAttribute('id', 'text-gamecomment');
+textGameComment.setAttribute('class', 'text-modal');*/
 buttonNewGame.setAttribute('id', 'button-newgame');
 buttonNewGame.setAttribute('class', 'buttons-modal buttons');
 buttonNewGame.innerText = 'NEW GAME';
@@ -143,12 +173,27 @@ containerRules.appendChild(rules);
 containerLetsStart.appendChild(textLetsStart);
 containerLetsStart.appendChild(textMakeChoice);
 containerInformationRound.appendChild(numberRound);
-containerInformationRound.appendChild(choicePlayer);
-containerInformationRound.appendChild(choiceComputer);
+containerInformationRound.appendChild(containerChoices);
+containerChoices.appendChild(choicePlayer);
+containerChoices.appendChild(choiceComputer);
 containerInformationRound.appendChild(resultRound);
+//
 containerModal.appendChild(contentModal);
+contentModal.appendChild(containerGameResult);
 contentModal.appendChild(buttonNewGame);
 contentModal.appendChild(buttonClose);
+containerGameResult.appendChild(textGameOver);
+/*containerGameResult.appendChild(textGameResult);
+containerGameResult.appendChild(textGameComment);*/
+containerGameResult.appendChild(tableResult);
+tableResult.appendChild(thead);
+tableResult.appendChild(tbody);
+thead.appendChild(tableResultHeaderRow);
+tableResultHeaderRow.appendChild(tableResultHeaderPlayer);
+tableResultHeaderRow.appendChild(tableResultHeaderComputer);
+tbody.appendChild(tableResultDataRow);
+tableResultDataRow.appendChild(tableResultDataPlayer);
+tableResultDataRow.appendChild(tableResultDataComputer);
 
 document.body.appendChild(containerAfterClose);
 containerAfterClose.appendChild(buttonHomePage);
@@ -323,17 +368,24 @@ function playGame(playerSign) {
   if (playerScore === 5 || computerScore === 5) {
     console.log('Game Over!');
     console.log(`Final Score:\nPlayer:${playerScore}\nComputer${computerScore}`);
+    /*textGameResult.innerHTML= `Final Score:\nPlayer:${playerScore}\nComputer${computerScore}`;*/
 
     if (playerScore > computerScore) {
       console.log('You win the game!');
+      /*textGameComment.innerText = 'You win the game!'*/
     } 
     else if (playerScore < computerScore) {
       console.log('The computer wins the game!');
+      /*textGameComment.innerText = 'The computer wins the game!'*/
     } 
     else {
       console.log('The game ends in a tie!');
+      /*textGameComment.innerText = 'The game ends in a tie!';*/
     }
+    /*tableResultDataPlayer.textContent = playerScore.toString();
+    tableResultDataComputer.textContent = computerScore.toString();*/
     disableButtonsChoice();
     showModalWindow();
+    
   }
 };

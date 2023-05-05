@@ -14,12 +14,17 @@ h2 {
     font-size: 3.5rem;
 }
 
+table {
+    border-collapse: collapse;
+    border: 1px solid black;
+  }
+
 .containers {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /*border: .4rem solid #F2AC29;*/
+    border: .4rem solid #F2AC29;
     font-family: 'Lobster', cursive, sans-serif;
     padding: 0px;
     margin-top: 0px;
@@ -84,11 +89,16 @@ h2 {
 
 .text-playpage {
     line-height: 2rem;
-    color: #5483BF
+    color: #03A678;
 }
 
 .text-informationround {
     color: #5483BF;
+
+}
+
+.choices {
+    line-height: 0rem;
 }
 
 .text-footer {
@@ -115,18 +125,59 @@ h2 {
 
 #container-rules {
     margin-right: auto;
-    border-style: inset;
+    border-left: 4px solid #03A678;
+    border-top: 4px solid #03A678;
+}
+
+#rules {
+    line-height: 2rem;
+    color: #5483BF;
 }
 
 #text-letsstart {
     color: #F205B3;
 }
 
+#text-makechoice {
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+#button-rock {
+    background-image: url('./images/rock.png');
+}
+
+#button-paper {
+    background-image: url('./images/paper.png');
+}
+
+#button-scissors {
+    background-image: url('./images/scissors.png');
+}
+
+#container-informationround {
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#container-choices {
+    align-items: flex-start;
+    margin-top: 10px;
+}
+
+#number-round, #text-gameover {
+    margin-bottom: 2.5rem;
+}
+
+#round-result {
+    text-align: center;
+}
+
 #container-modal {
     width: 100%;
     height: 100vh;
     position: absolute;
-    background: rgba(0, 0, 0, 0.7);
+    background: #F2F2F2;
     display: none;
     align-items: center;
     justify-content: center;
@@ -135,7 +186,7 @@ h2 {
 #container-modal #content-modal {
     max-width: 650px;
     width: 100%;
-    background: white;
+    background: #F2B705;
     height: 400px;
     display: none;
     align-items: center;
@@ -149,18 +200,3 @@ h2 {
     right: 0;
     margin: 0 auto;
 }
-
-#button-rock {
-    background-image: url('./images/rock.png');
-}
-
-#button-paper {
-    background-image: url('./images/paper.png');
-}
-
-#button-scissors {
-    background-image: url('./images/scissors.png');
-  }
-
-
-
