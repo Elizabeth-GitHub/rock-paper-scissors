@@ -14,9 +14,18 @@ h2 {
     font-size: 3.5rem;
 }
 
-table {
+.table {
     border-collapse: collapse;
+    border-spacing: 40px;
     border: 1px solid black;
+    line-height: normal;  
+}
+
+th, td {
+    border: 1px solid black;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
 .containers {
@@ -24,7 +33,7 @@ table {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: .4rem solid #F2AC29;
+    /*border: .4rem solid #F2AC29;*/
     font-family: 'Lobster', cursive, sans-serif;
     padding: 0px;
     margin-top: 0px;
@@ -177,20 +186,27 @@ table {
     width: 100%;
     height: 100vh;
     position: absolute;
-    background: #F2F2F2;
+    background: #F2EBDC;
     display: none;
     align-items: center;
     justify-content: center;
 }
 
-#container-modal #content-modal {
-    max-width: 650px;
+#content-modal {
+    max-width: 50rem;
     width: 100%;
-    background: #F2B705;
-    height: 400px;
+    background: #B8D9BA;
+    height: 70rem;
     display: none;
     align-items: center;
     justify-content: center;
+}
+
+#image-whowins {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    max-height: 28vw;
+    border: .4rem solid #F205CB;
 }
 
 #container-footer {

@@ -29,12 +29,10 @@ const containerModal = document.createElement('div');
 const contentModal = document.createElement('div');
 const containerGameResult = document.createElement('div');
 const textGameOver = document.createElement('h2');
-/*const textGameResult = document.createElement('p');
-const textGameComment = document.createElement('p');*/
+const containerImageWhoWins = document.createElement('div');
+const imageWhoWins = document.createElement('img');
 const tableResult = document.createElement('table');
-const thead = document.createElement('thead');
-const tbody = document.createElement('tbody');
-const tableResultHeaderRow= document.createElement('tr');
+const tableResultHeaderRow = document.createElement('tr');
 const tableResultHeaderPlayer = document.createElement('th');
 const tableResultHeaderComputer = document.createElement('th');
 const tableResultDataRow = document.createElement('tr');
@@ -119,12 +117,15 @@ containerGameResult.setAttribute('class', 'containers');
 textGameOver.setAttribute('id', 'text-gameover');
 textGameOver.setAttribute('class', 'text-modal');
 textGameOver.innerText = 'GAME OVER!';
+
+imageWhoWins.alt = 'A winner';
+imageWhoWins.setAttribute('id', 'image-whowins');
+imageWhoWins.setAttribute('class', 'image');
 /*textGameResult.setAttribute('id', 'text-gameresult');
 textGameResult.setAttribute('class', 'text-modal');*/
+tableResult.classList.add('table');
 tableResultHeaderPlayer.textContent = 'YOU';
 tableResultHeaderComputer.textContent = 'COMPUTER';
-tableResultDataPlayer.textContent = '0';
-tableResultDataComputer.textContent = '1';
 /*textGameComment.setAttribute('id', 'text-gamecomment');
 textGameComment.setAttribute('class', 'text-modal');*/
 buttonNewGame.setAttribute('id', 'button-newgame');
@@ -180,18 +181,16 @@ containerInformationRound.appendChild(resultRound);
 //
 containerModal.appendChild(contentModal);
 contentModal.appendChild(containerGameResult);
+contentModal.appendChild(containerImageWhoWins);
+contentModal.appendChild(tableResult);
 contentModal.appendChild(buttonNewGame);
 contentModal.appendChild(buttonClose);
 containerGameResult.appendChild(textGameOver);
-/*containerGameResult.appendChild(textGameResult);
-containerGameResult.appendChild(textGameComment);*/
-containerGameResult.appendChild(tableResult);
-tableResult.appendChild(thead);
-tableResult.appendChild(tbody);
-thead.appendChild(tableResultHeaderRow);
+containerImageWhoWins.appendChild(imageWhoWins);
+tableResult.appendChild(tableResultHeaderRow);
+tableResult.appendChild(tableResultDataRow);
 tableResultHeaderRow.appendChild(tableResultHeaderPlayer);
 tableResultHeaderRow.appendChild(tableResultHeaderComputer);
-tbody.appendChild(tableResultDataRow);
 tableResultDataRow.appendChild(tableResultDataPlayer);
 tableResultDataRow.appendChild(tableResultDataComputer);
 
@@ -372,20 +371,22 @@ function playGame(playerSign) {
 
     if (playerScore > computerScore) {
       console.log('You win the game!');
+      imageWhoWins.src = './images/youwin.png';
       /*textGameComment.innerText = 'You win the game!'*/
     } 
     else if (playerScore < computerScore) {
       console.log('The computer wins the game!');
       /*textGameComment.innerText = 'The computer wins the game!'*/
+      imageWhoWins.src = './images/computerwins.png';
     } 
     else {
       console.log('The game ends in a tie!');
       /*textGameComment.innerText = 'The game ends in a tie!';*/
+      imageWhoWins.src = './images/tie.png';
     }
-    /*tableResultDataPlayer.textContent = playerScore.toString();
-    tableResultDataComputer.textContent = computerScore.toString();*/
+    tableResultDataPlayer.textContent = playerScore.toString();
+    tableResultDataComputer.textContent = computerScore.toString();
     disableButtonsChoice();
     showModalWindow();
-    
   }
 };
