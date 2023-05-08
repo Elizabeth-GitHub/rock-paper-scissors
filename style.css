@@ -209,6 +209,10 @@ th, td {
     border: .4rem solid #F205CB;
 }
 
+#container-buttonsmodal {
+    flex-direction: row;
+}
+
 #container-footer {
     position: absolute;
     bottom: 0;

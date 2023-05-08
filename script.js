@@ -29,6 +29,7 @@ const containerModal = document.createElement('div');
 const contentModal = document.createElement('div');
 const containerGameResult = document.createElement('div');
 const textGameOver = document.createElement('h2');
+const textGameComment = document.createElement('h3');
 const containerImageWhoWins = document.createElement('div');
 const imageWhoWins = document.createElement('img');
 const tableResult = document.createElement('table');
@@ -38,6 +39,7 @@ const tableResultHeaderComputer = document.createElement('th');
 const tableResultDataRow = document.createElement('tr');
 const tableResultDataPlayer = document.createElement('td');
 const tableResultDataComputer = document.createElement('td');
+const containerButtonsModal = document.createElement('div');
 const buttonNewGame = document.createElement('button');
 const buttonClose = document.createElement('button');
 // CONTENT AFTER 'CLOSE' BUTTON
@@ -113,11 +115,12 @@ containerModal.setAttribute('class', 'containers-modal containers');
 contentModal.setAttribute('id', 'content-modal');
 contentModal.setAttribute('class', 'containers-modal containers');
 containerGameResult.setAttribute('id', 'container-gameresult');
-containerGameResult.setAttribute('class', 'containers');
+containerGameResult.setAttribute('class', 'containers-modal containers');
+containerButtonsModal.setAttribute('id', 'container-buttonsmodal');
+containerButtonsModal.classList.add('containers-modal', 'containers');
 textGameOver.setAttribute('id', 'text-gameover');
 textGameOver.setAttribute('class', 'text-modal');
 textGameOver.innerText = 'GAME OVER!';
-
 imageWhoWins.alt = 'A winner';
 imageWhoWins.setAttribute('id', 'image-whowins');
 imageWhoWins.setAttribute('class', 'image');
@@ -126,8 +129,8 @@ textGameResult.setAttribute('class', 'text-modal');*/
 tableResult.classList.add('table');
 tableResultHeaderPlayer.textContent = 'YOU';
 tableResultHeaderComputer.textContent = 'COMPUTER';
-/*textGameComment.setAttribute('id', 'text-gamecomment');
-textGameComment.setAttribute('class', 'text-modal');*/
+textGameComment.setAttribute('id', 'text-gamecomment');
+textGameComment.setAttribute('class', 'text-modal');
 buttonNewGame.setAttribute('id', 'button-newgame');
 buttonNewGame.setAttribute('class', 'buttons-modal buttons');
 buttonNewGame.innerText = 'NEW GAME';
@@ -181,10 +184,12 @@ containerInformationRound.appendChild(resultRound);
 //
 containerModal.appendChild(contentModal);
 contentModal.appendChild(containerGameResult);
+contentModal.appendChild(textGameComment);
 contentModal.appendChild(containerImageWhoWins);
 contentModal.appendChild(tableResult);
-contentModal.appendChild(buttonNewGame);
-contentModal.appendChild(buttonClose);
+contentModal.appendChild(containerButtonsModal);
+/*contentModal.appendChild(buttonNewGame);
+contentModal.appendChild(buttonClose);*/
 containerGameResult.appendChild(textGameOver);
 containerImageWhoWins.appendChild(imageWhoWins);
 tableResult.appendChild(tableResultHeaderRow);
@@ -193,6 +198,8 @@ tableResultHeaderRow.appendChild(tableResultHeaderPlayer);
 tableResultHeaderRow.appendChild(tableResultHeaderComputer);
 tableResultDataRow.appendChild(tableResultDataPlayer);
 tableResultDataRow.appendChild(tableResultDataComputer);
+containerButtonsModal.appendChild(buttonNewGame);
+containerButtonsModal.appendChild(buttonClose);
 
 document.body.appendChild(containerAfterClose);
 containerAfterClose.appendChild(buttonHomePage);
@@ -372,16 +379,16 @@ function playGame(playerSign) {
     if (playerScore > computerScore) {
       console.log('You win the game!');
       imageWhoWins.src = './images/youwin.png';
-      /*textGameComment.innerText = 'You win the game!'*/
+      textGameComment.innerText = 'You win the game!'
     } 
     else if (playerScore < computerScore) {
       console.log('The computer wins the game!');
-      /*textGameComment.innerText = 'The computer wins the game!'*/
+      textGameComment.innerText = 'The computer wins the game!'
       imageWhoWins.src = './images/computerwins.png';
     } 
     else {
       console.log('The game ends in a tie!');
-      /*textGameComment.innerText = 'The game ends in a tie!';*/
+      textGameComment.innerText = 'The game ends in a tie!';
       imageWhoWins.src = './images/tie.png';
     }
     tableResultDataPlayer.textContent = playerScore.toString();
