@@ -341,6 +341,24 @@ function updateScore(resultNew) {
   }
 };
 
+function getFinalResult(playerResult, computerResult){
+  if (playerResult > computerResult) {
+    console.log('You win the game!');
+    imageWhoWins.src = './images/youwin.png';
+    textGameComment.innerText = 'You win the game!'
+  } 
+  else if (playerResult < computerResult) {
+    console.log('The computer wins the game!');
+    textGameComment.innerText = 'The computer wins the game!'
+    imageWhoWins.src = './images/computerwins.png';
+  } 
+  else {
+    console.log('The game ends in a tie!');
+    textGameComment.innerText = 'The game ends in a tie!';
+    imageWhoWins.src = './images/tie.png';
+  }
+};
+
 function newGame(){
   playerScore = 0;
   computerScore = 0;
@@ -407,23 +425,7 @@ function playGame(playerSign) {
   if (playerScore === 5 || computerScore === 5) {
     console.log('Game Over!');
     console.log(`Final Score:\nPlayer:${playerScore}\nComputer${computerScore}`);
-    /*textGameResult.innerHTML= `Final Score:\nPlayer:${playerScore}\nComputer${computerScore}`;*/
-
-    if (playerScore > computerScore) {
-      console.log('You win the game!');
-      imageWhoWins.src = './images/youwin.png';
-      textGameComment.innerText = 'You win the game!'
-    } 
-    else if (playerScore < computerScore) {
-      console.log('The computer wins the game!');
-      textGameComment.innerText = 'The computer wins the game!'
-      imageWhoWins.src = './images/computerwins.png';
-    } 
-    else {
-      console.log('The game ends in a tie!');
-      textGameComment.innerText = 'The game ends in a tie!';
-      imageWhoWins.src = './images/tie.png';
-    }
+    getFinalResult(playerScore, computerScore);
     tableResultDataPlayer.textContent = playerScore.toString();
     tableResultDataComputer.textContent = computerScore.toString();
     disableButtonsChoice();
