@@ -5,7 +5,7 @@ body {
 
 h1 {
     font-size: 5rem;
-    margin-bottom: 0.5;
+    margin-bottom: 0.5em;
 }
 
 h2 {
@@ -14,15 +14,21 @@ h2 {
     font-size: 3.5rem;
 }
 
+caption {
+    font-weight: bold;
+    color: #F205CB;
+    border-bottom: 2px solid #F205CB;
+  }  
+
 .table {
     border-collapse: collapse;
     border-spacing: 40px;
-    border: 1px solid black;
     line-height: normal;  
+    color: #0F1AF2;
+    margin-bottom: 1rem;
 }
 
 th, td {
-    border: 1px solid black;
     text-align: center;
     padding-left: 10px;
     padding-right: 10px;
@@ -43,12 +49,12 @@ th, td {
 
 .main-header {
     font-family: 'Montserrat', sans-serif;
-    font-size: 5rem;
+    font-size: calc(2rem + 2vw);
     font-style: italic;
     font-weight: 800;
     text-align: justify;
-    margin-top: 3;
-    margin-bottom: 2.5;
+    margin-top: 3rem;
+    margin-bottom: 2.5rem;
     color: #F20544;
 }
 
@@ -110,6 +116,10 @@ th, td {
     line-height: 0rem;
 }
 
+.text-gameover{
+    color: #F205B3;
+}
+
 .text-footer {
     font-size: 0.75rem;
     color: #03A678;
@@ -164,6 +174,20 @@ th, td {
     background-image: url('./images/scissors.png');
 }
 
+#container-currentscore {
+    padding-top: 1rem;
+    color: #F20544;;
+}
+
+#scorecomment {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    z-index: 1;
+    color: #5483BF;
+}
+
 #container-informationround {
     justify-content: flex-start;
     align-items: center;
@@ -173,6 +197,7 @@ th, td {
     align-items: flex-start;
     margin-top: 10px;
 }
+
 
 #number-round, #text-gameover {
     margin-bottom: 2.5rem;
@@ -211,6 +236,8 @@ th, td {
 
 #container-buttonsmodal {
     flex-direction: row;
+    gap: 17rem;
+    padding-top: 1rem;;
 }
 
 #container-footer {

@@ -16,8 +16,12 @@ const rules = document.createElement('p');
 const containerLetsStart = document.createElement('div');
 const textMakeChoice = document.createElement('p');
 const containerButtonsChoice = document.getElementById('buttons-container');;
-const containerInformationRound = document.createElement('div');
 const buttonsChoice = document.querySelectorAll('.buttons-choice');
+const containerCurrentScore = document.createElement('div');
+const textCurrentScore = document.createElement('h3');
+const currentScore = document.createElement('p');
+const scoreComment = document.createElement('p');
+const containerInformationRound = document.createElement('div');
 const numberRound = document.createElement('h2');
 const containerChoices = document.createElement('div');
 const choicePlayer = document.createElement('p');
@@ -33,6 +37,7 @@ const textGameComment = document.createElement('h3');
 const containerImageWhoWins = document.createElement('div');
 const imageWhoWins = document.createElement('img');
 const tableResult = document.createElement('table');
+const captionTableResult = tableResult.createCaption();
 const tableResultHeaderRow = document.createElement('tr');
 const tableResultHeaderPlayer = document.createElement('th');
 const tableResultHeaderComputer = document.createElement('th');
@@ -100,6 +105,14 @@ textLetsStart.innerText = 'LET\'S START!'
 textMakeChoice.setAttribute('id', 'text-makechoice');
 textMakeChoice.setAttribute('class', 'text-playpage');
 textMakeChoice.innerText = 'MAKE YOUR CHOICE:'
+containerCurrentScore.setAttribute('id', 'container-currentscore');
+containerCurrentScore.classList.add('containers', 'containers-playpage');
+textCurrentScore.setAttribute('id', 'text-currentscore');
+textCurrentScore.innerText = 'CURRENT SCORE:'
+currentScore.setAttribute('id', 'currentscore');
+currentScore.innerHTML = '0 : 0';
+scoreComment.setAttribute('id', 'scorecomment');
+scoreComment.innerText = 'Your score : Computer score';
 containerInformationRound.setAttribute('id', 'container-informationround');
 containerInformationRound.setAttribute('class', 'comtainers-playpage containers');
 numberRound.setAttribute('class', 'text-playpage text-informationround');
@@ -119,18 +132,18 @@ containerGameResult.setAttribute('class', 'containers-modal containers');
 containerButtonsModal.setAttribute('id', 'container-buttonsmodal');
 containerButtonsModal.classList.add('containers-modal', 'containers');
 textGameOver.setAttribute('id', 'text-gameover');
-textGameOver.setAttribute('class', 'text-modal');
+textGameOver.setAttribute('class', 'text-gameover text-modal');
 textGameOver.innerText = 'GAME OVER!';
+textGameComment.setAttribute('id', 'text-gamecomment');
+textGameComment.setAttribute('class', 'text-gameover text-modal');
 imageWhoWins.alt = 'A winner';
 imageWhoWins.setAttribute('id', 'image-whowins');
 imageWhoWins.setAttribute('class', 'image');
-/*textGameResult.setAttribute('id', 'text-gameresult');
-textGameResult.setAttribute('class', 'text-modal');*/
 tableResult.classList.add('table');
+captionTableResult.textContent = 'FINAL SCORE:';
 tableResultHeaderPlayer.textContent = 'YOU';
 tableResultHeaderComputer.textContent = 'COMPUTER';
-textGameComment.setAttribute('id', 'text-gamecomment');
-textGameComment.setAttribute('class', 'text-modal');
+
 buttonNewGame.setAttribute('id', 'button-newgame');
 buttonNewGame.setAttribute('class', 'buttons-modal buttons');
 buttonNewGame.innerText = 'NEW GAME';
@@ -168,14 +181,19 @@ containerBottomContent.appendChild(textReadyStart);
 containerBottomContent.appendChild(buttonStartGame);
 //
 document.body.appendChild(containerMain);
+document.body.appendChild(currentScore);
+document.body.appendChild(scoreComment);
 containerMain.appendChild(containerRules);
 containerMain.appendChild(containerLetsStart);
 containerMain.appendChild(containerButtonsChoice);
+containerMain.appendChild(containerCurrentScore);
 containerMain.appendChild(containerInformationRound);
 containerMain.appendChild(containerModal);
 containerRules.appendChild(rules);
 containerLetsStart.appendChild(textLetsStart);
 containerLetsStart.appendChild(textMakeChoice);
+containerCurrentScore.appendChild(textCurrentScore);
+containerCurrentScore.appendChild(currentScore);
 containerInformationRound.appendChild(numberRound);
 containerInformationRound.appendChild(containerChoices);
 containerChoices.appendChild(choicePlayer);
@@ -188,8 +206,6 @@ contentModal.appendChild(textGameComment);
 contentModal.appendChild(containerImageWhoWins);
 contentModal.appendChild(tableResult);
 contentModal.appendChild(containerButtonsModal);
-/*contentModal.appendChild(buttonNewGame);
-contentModal.appendChild(buttonClose);*/
 containerGameResult.appendChild(textGameOver);
 containerImageWhoWins.appendChild(imageWhoWins);
 tableResult.appendChild(tableResultHeaderRow);
@@ -215,6 +231,20 @@ buttonStartGame.addEventListener('click', () => {
 
 buttonsChoice.forEach(button => {
   button.addEventListener('click', handleButtonsChoiceClick);
+});
+
+currentScore.addEventListener('mousemove', (event) => {
+  scoreComment.style.display = 'flex';
+  scoreComment.style.top = `${event.clientY + 10}px`; 
+  scoreComment.style.left = `${event.clientX + 10}px`; 
+});
+
+currentScore.addEventListener('mouseout', () => {
+  scoreComment.style.display = 'none';
+});
+
+currentScore.addEventListener('mouseover', () => {
+  currentScore.style.cursor = 'pointer'; 
 });
 
 buttonNewGame.addEventListener('click', newGame);
@@ -319,6 +349,8 @@ function newGame(){
   enableButtonsChoice();
   hideModalWindow();
   changeLetsStart(roundNumber);
+  currentScore.innerHTML = `${playerScore} : ${computerScore}`;
+  
 };
 
 function playGame(playerSign) {
@@ -369,6 +401,7 @@ function playGame(playerSign) {
   changeLetsStart(roundNumber);
   console.log('Round result:',roundResult, roundComment);
   console.log(`Player score: ${playerScore}\nComputer score: ${computerScore}`);
+  currentScore.innerHTML = `${playerScore} : ${computerScore}`;
   resultRound.innerText = `${roundResult}\n${roundComment}`;
 
   if (playerScore === 5 || computerScore === 5) {
