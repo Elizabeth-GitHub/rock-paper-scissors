@@ -14,11 +14,21 @@ h2 {
     font-size: 3.5rem;
 }
 
+a {
+    text-decoration: none;
+}
+
+th, td {
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
 caption {
     font-weight: bold;
     color: #F205CB;
     border-bottom: 2px solid #F205CB;
-  }  
+}
 
 .table {
     border-collapse: collapse;
@@ -27,12 +37,6 @@ caption {
     color: #0F1AF2;
     margin-bottom: 1rem;
 }
-
-th, td {
-    text-align: center;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
 
 .containers {
     display: flex;
@@ -56,6 +60,13 @@ th, td {
     margin-top: 3rem;
     margin-bottom: 2.5rem;
     color: #F20544;
+}
+
+.image {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    max-height: 28vw;
+    border: .4rem solid #F205CB;
 }
 
 .text-start {
@@ -109,7 +120,6 @@ th, td {
 
 .text-informationround {
     color: #5483BF;
-
 }
 
 .choices {
@@ -122,11 +132,22 @@ th, td {
 
 .text-footer {
     font-size: 0.75rem;
-    color: #03A678;
     line-height: 6px;
     margin-bottom: 0.5rem;
     margin-top: 0rem;
 }
+
+.text-footercolornotclose {
+    color: #03A678;
+}
+
+.text-footercolorclose {
+   color: #07B0F2;
+}
+
+.footer-color {
+    color: #07B0F2;
+  }
 
 #container-textwelcome {
     display: flex;
@@ -134,13 +155,6 @@ th, td {
     justify-content: center;
     align-items: center;
   }
-
-#container-imagestart #image-start{
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    max-height: 28vw;
-    border: .4rem solid #F205CB;
-}
 
 #container-rules {
     margin-right: auto;
@@ -240,10 +254,32 @@ th, td {
     padding-top: 1rem;;
 }
 
+#header-thanks {
+    color: #F20505;
+}
+
+#image-thanks {
+    border: .4rem solid #F20505;
+}
+
+#text-thanks {
+    text-align: center;
+    line-height: normal;
+    font-size: 2rem;
+    color: #0583F2;
+}
+
+#button-homepage {
+    margin-top: 2rem;
+    border: .4rem solid #F20505;
+    color: #F20505;
+}
+
 #container-footer {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     margin: 0 auto;
+    
 }

@@ -49,11 +49,18 @@ const buttonNewGame = document.createElement('button');
 const buttonClose = document.createElement('button');
 // CONTENT AFTER 'CLOSE' BUTTON
 const containerAfterClose = document.createElement('div');
+const containerThanks = document.createElement('div');
+const headerThanks = document.createElement('h1');
+const containerImageThanks = document.createElement('div');
+const imageThanks = document.createElement('img');
+const textThanks = document.createElement('p');
 const buttonHomePage = document.createElement('button');
 //FOOTER
 const containerFooter = document.createElement('div');
 const creator = document.createElement('p');
+const creatorLink = document.createElement('a');
 const credits = document.createElement('p');
+const creditsLink = document.createElement('a');
 //PLAY VARIABLES
 let playerScore = 0;
 let computerScore = 0;
@@ -143,7 +150,6 @@ tableResult.classList.add('table');
 captionTableResult.textContent = 'FINAL SCORE:';
 tableResultHeaderPlayer.textContent = 'YOU';
 tableResultHeaderComputer.textContent = 'COMPUTER';
-
 buttonNewGame.setAttribute('id', 'button-newgame');
 buttonNewGame.setAttribute('class', 'buttons-modal buttons');
 buttonNewGame.innerText = 'NEW GAME';
@@ -152,21 +158,39 @@ buttonClose.setAttribute('id', 'button-close');
 buttonClose.setAttribute('class', 'buttons-modal buttons');
 buttonClose.innerText = 'CLOSE';
 buttonClose.disabled = true;
+//
 containerAfterClose.setAttribute('id', 'container-afterclose');
 containerAfterClose.setAttribute('class', 'containers-afterclose containers');
 containerAfterClose.style.display = 'none';
+containerThanks.setAttribute('id', 'container-thanks');
+containerThanks.classList.add('containers', 'containers-afterclose');
+headerThanks.setAttribute('id', 'header-thanks');
+headerThanks.innerText = 'THANK YOU!';
+containerImageThanks.setAttribute('id', 'container-imagethanks');
+containerImageThanks.classList.add('containers', 'containers-afterclose');
+imageThanks.setAttribute('id', 'image-thanks');
+imageThanks.classList.add('image');
+imageThanks.src = './images/robortheart.png';
+imageThanks.alt = 'Thank you!';
+textThanks.setAttribute('id', 'text-thanks');
+textThanks.innerText = 'Thank you for playing our rock-paper-scissors game!\nWe hope you had fun and enjoyed the experience. We appreciate your time and hope you come back to play again soon❤️'
 buttonHomePage.setAttribute('id', 'button-homepage');
 buttonHomePage.setAttribute('class', 'buttons-afterclose buttons');
 buttonHomePage.innerText = 'BACK TO HOME PAGE';
 buttonHomePage.disabled = true;
+//
 containerFooter.setAttribute('id', 'container-footer');
 containerFooter.setAttribute('class', 'containers');
-creator.setAttribute('id', 'creator');
-creator.setAttribute('class', 'text-footer');
-creator.innerText = 'Created by Elizabeth Developer';
+creator.setAttribute('class', 'text-footer text-footercolornotclose');
+creatorLink.classList.add('text-footer', 'text-footercolornotclose');
+creatorLink.href = 'https://github.com/Elizabeth-GitHub';
+creatorLink.innerText = 'Elizabeth Developer';
 credits.setAttribute('id', 'credits');
-credits.setAttribute('class', 'text-footer');
-credits.innerText = 'All images used in this project were generated using the Canva AI Image Generator.';
+credits.setAttribute('class', 'text-footer text-footercolornotclose');
+creditsLink.setAttribute('id', 'credits-link');
+creditsLink.classList.add('text-footer', 'text-footercolornotclose');
+creditsLink.href = 'https://www.canva.com/ai-image-generator/';
+creditsLink.innerText = 'Canva AI Image Generator';
 
 document.body.appendChild(containerPreStart);
 containerPreStart.appendChild(containerHeaderStart);
@@ -218,11 +242,22 @@ containerButtonsModal.appendChild(buttonNewGame);
 containerButtonsModal.appendChild(buttonClose);
 
 document.body.appendChild(containerAfterClose);
+containerAfterClose.appendChild(headerThanks);
+containerAfterClose.appendChild(containerThanks);
+containerAfterClose.appendChild(containerImageThanks);
 containerAfterClose.appendChild(buttonHomePage);
+containerImageThanks.appendChild(imageThanks);
+containerThanks.appendChild(textThanks);
 
 document.body.appendChild(containerFooter);
 containerFooter.appendChild(creator);
 containerFooter.appendChild(credits);
+creator.appendChild(document.createTextNode('Created by '));
+creator.appendChild(creatorLink);
+creator.appendChild(document.createTextNode('.'));
+credits.appendChild(document.createTextNode('All images used in this project were generated using the '));
+credits.appendChild(creditsLink);
+credits.appendChild(document.createTextNode('.'));
 
 buttonStartGame.addEventListener('click', () => {
   containerPreStart.style.display = 'none';
@@ -295,12 +330,25 @@ function hideModalWindow() {
   disableContainer(containerInformationRound);
 }
 
+function changeFooterColor() {
+  const childElements = containerFooter.querySelectorAll('*');
+
+  childElements.forEach((element) => {
+    element.classList.add('text-footercolorclose');
+  });
+
+  childElements.forEach((element) => {
+    element.classList.remove('ttext-footercolornotclose');
+  });
+};
+
 function moveToCloseContent() {
   hideModalWindow();
   containerMain.style.display = 'none';
   buttonNewGame.disabled = true;
   containerAfterClose.style.display = 'flex';
   buttonHomePage.disabled = false;
+  changeFooterColor();
 };
 
 function moveToMainPage() {
