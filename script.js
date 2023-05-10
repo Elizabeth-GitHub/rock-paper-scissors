@@ -439,8 +439,7 @@ function newGame(){
   enableButtonsChoice();
   hideModalWindow();
   changeLetsStart(roundNumber);
-  currentScore.innerHTML = `${playerScore} : ${computerScore}`;
-  
+  currentScore.innerHTML = `0 : 0`;
 };
 
 function playGame(playerSign) {
