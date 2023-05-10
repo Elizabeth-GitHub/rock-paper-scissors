@@ -369,6 +369,30 @@ function capitaliseFirstLetter(word) {
   return word[0].toUpperCase() + word.slice(1,);
 };
 
+function getRoundResult(playChoice, compChoice) {
+  let rsltRound = 'Computer wins!';
+
+  switch (playChoice) {
+    case 'rock':
+      if (compChoice === 'scissors') {
+        rsltRound = 'You win!';
+      }
+      break;
+    case 'paper':
+      if (compChoice === 'rock') {
+        rsltRound = 'You win!';
+      }
+      break;
+    case 'scissors':
+      if (compChoice === 'paper') {
+        rsltRound = 'You win!';
+      }
+      break;
+    }
+    
+    return rsltRound;
+}
+
 function getRoundComment(resultToComment, playerSelection, computerSelection) {
   if (resultToComment === 'You win!') {
     return `${capitaliseFirstLetter(playerSelection)} ${playerSelection === 'scissors' ? 'beat' : 'beats'} ${
@@ -432,7 +456,8 @@ function playGame(playerSign) {
   choiceComputer.innerHTML = `Computer choice: ${capitaliseFirstLetter(computerSign)}`;
 
   if (playerSign !== computerSign) {
-    switch (playerSign) {
+    roundResult = getRoundResult(playerSign, computerSign);
+    /*switch (playerSign) {
       case 'rock':
         if (computerSign === 'paper') {
           roundResult = 'Computer wins!';
@@ -456,18 +481,17 @@ function playGame(playerSign) {
         else {
           roundResult = 'You win!';
         }
-        break;
-    }
+        break;*/
     roundComment = getRoundComment(roundResult, playerSign, computerSign);
   }
   
   updateScore(roundResult);
+  currentScore.innerHTML = `${playerScore} : ${computerScore}`
   enableContainer(containerInformationRound);
   roundNumber++;
   changeLetsStart(roundNumber);
   console.log('Round result:',roundResult, roundComment);
   console.log(`Player score: ${playerScore}\nComputer score: ${computerScore}`);
-  currentScore.innerHTML = `${playerScore} : ${computerScore}`;
   resultRound.innerText = `${roundResult}\n${roundComment}`;
 
   if (playerScore === 5 || computerScore === 5) {
